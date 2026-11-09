@@ -144,46 +144,7 @@ fn vue_totale ()
 
 fn vue_partielle()
 {
-    let app: &gtk::Application = &Default::default();
-    let entry1 = Entry::builder()
-        .placeholder_text("Nom…")
-        .hexpand(true)
-        .build();
-
-    let entry2 = Entry::builder()
-        .placeholder_text("Prénom…")
-        .hexpand(true)
-        .build();
-
-    let entry3 = Entry::builder()
-        .placeholder_text("Année de naissance…")
-        .hexpand(true)
-        .build();
-
-    let button = Button::with_label("Valider");
-
-    // Clone le widget pour pouvoir l'utiliser dans la closure ci-dessous.
-    let entry_for_button1 = entry1.clone();
-
-    let layout = gtk::Box::new(Orientation::Vertical, 8);
-    layout.set_margin_top(12);
-    layout.set_margin_bottom(12);
-    layout.set_margin_start(12);
-    layout.set_margin_end(12);
-    layout.append(&entry1);
-    layout.append(&entry2);
-    layout.append(&entry3);
-    layout.append(&button);
-
-    let window = ApplicationWindow::builder()
-        .application(app)
-        .title("Recherche ou saisie")
-        .default_width(320)
-        .child(&layout)
-        .build();
-
-    window.present();
-
+    let ( entry_for_button1, entry_for_button2, entry_for_button3, button ) = saisie();
     button.connect_clicked(move |_| 
     {
         // text() renvoie un glib::GString ; to_string() donne un String Rust.
@@ -241,48 +202,7 @@ struct Colonne3
 
 fn ajouter_individu()
 {
-    let app: &gtk::Application = &Default::default();
-    let entry1 = Entry::builder()
-        .placeholder_text("Nom…")
-        .hexpand(true)
-        .build();
-
-    let entry2 = Entry::builder()
-        .placeholder_text("Prénom…")
-        .hexpand(true)
-        .build();
-
-    let entry3 = Entry::builder()
-        .placeholder_text("Année de naissance…")
-        .hexpand(true)
-        .build();
-
-    let button = Button::with_label("Valider");
-
-    // Clone le widget pour pouvoir l'utiliser dans la closure ci-dessous.
-    let entry_for_button1 = entry1.clone();
-    let entry_for_button2 = entry2.clone();
-    let entry_for_button3 = entry3.clone();
-
-    let layout = gtk::Box::new(Orientation::Vertical, 8);
-    layout.set_margin_top(12);
-    layout.set_margin_bottom(12);
-    layout.set_margin_start(12);
-    layout.set_margin_end(12);
-    layout.append(&entry1);
-    layout.append(&entry2);
-    layout.append(&entry3);
-    layout.append(&button);
-
-    let window = ApplicationWindow::builder()
-        .application(app)
-        .title("Recherche ou saisie")
-        .default_width(320)
-        .child(&layout)
-        .build();
-
-    window.present();
-
+    let ( entry_for_button1, entry_for_button2, entry_for_button3, button ) = saisie();
     button.connect_clicked(move |_| 
     {
         // text() renvoie un glib::GString ; to_string() donne un String Rust.
@@ -433,48 +353,7 @@ fn ajouter_individu()
 
 fn supprimer_individu()
 {
-    let app: &gtk::Application = &Default::default();
-    let entry1 = Entry::builder()
-        .placeholder_text("Nom…")
-        .hexpand(true)
-        .build();
-
-    let entry2 = Entry::builder()
-        .placeholder_text("Prénom…")
-        .hexpand(true)
-        .build();
-
-    let entry3 = Entry::builder()
-        .placeholder_text("Année de naissance…")
-        .hexpand(true)
-        .build();
-
-    let button = Button::with_label("Valider");
-
-    // Clone le widget pour pouvoir l'utiliser dans la closure ci-dessous.
-    let entry_for_button1 = entry1.clone();
-    let entry_for_button2 = entry2.clone();
-    let entry_for_button3 = entry3.clone();
-
-    let layout = gtk::Box::new(Orientation::Vertical, 8);
-    layout.set_margin_top(12);
-    layout.set_margin_bottom(12);
-    layout.set_margin_start(12);
-    layout.set_margin_end(12);
-    layout.append(&entry1);
-    layout.append(&entry2);
-    layout.append(&entry3);
-    layout.append(&button);
-
-    let window = ApplicationWindow::builder()
-        .application(app)
-        .title("Recherche ou saisie")
-        .default_width(320)
-        .child(&layout)
-        .build();
-
-    window.present();
-
+    let ( entry_for_button1, entry_for_button2, entry_for_button3, button ) = saisie();
     button.connect_clicked(move |_| 
     {
         // text() renvoie un glib::GString ; to_string() donne un String Rust.
@@ -668,4 +547,50 @@ fn affichage() -> gio::ListStore
     window.set_child(Some(&scrolled_window));
     window.present();
     store
+}
+
+fn saisie() -> ( Entry, Entry, Entry, Button )
+{
+        let app: &gtk::Application = &Default::default();
+    let entry1 = Entry::builder()
+        .placeholder_text("Nom…")
+        .hexpand(true)
+        .build();
+
+    let entry2 = Entry::builder()
+        .placeholder_text("Prénom…")
+        .hexpand(true)
+        .build();
+
+    let entry3 = Entry::builder()
+        .placeholder_text("Année de naissance…")
+        .hexpand(true)
+        .build();
+
+    let button = Button::with_label("Valider");
+
+    // Clone le widget pour pouvoir l'utiliser dans la closure ci-dessous.
+    let entry_for_button1 = entry1.clone();
+    let entry_for_button2 = entry2.clone();
+    let entry_for_button3 = entry3.clone();
+
+    let layout = gtk::Box::new(Orientation::Vertical, 8);
+    layout.set_margin_top(12);
+    layout.set_margin_bottom(12);
+    layout.set_margin_start(12);
+    layout.set_margin_end(12);
+    layout.append(&entry1);
+    layout.append(&entry2);
+    layout.append(&entry3);
+    layout.append(&button);
+
+    let window = ApplicationWindow::builder()
+        .application(app)
+        .title("Recherche ou saisie")
+        .default_width(320)
+        .child(&layout)
+        .build();
+
+    window.present();
+    ( entry_for_button1, entry_for_button2, entry_for_button3, button )
 }
