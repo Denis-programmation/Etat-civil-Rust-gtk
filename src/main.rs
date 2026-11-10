@@ -1,4 +1,4 @@
-use gtk::{ListStore, prelude::*};
+use gtk::prelude::*;
 use gtk::{gio, glib::{BoxedAnyObject}, ApplicationWindow, Button, Entry, Orientation};
 use mysql::*;
 use mysql::prelude::*;
@@ -251,7 +251,7 @@ fn ajouter_individu()
             return;
         }
         println!("{naissance}");
-
+// requête
         let url = "mysql://denis:12345678@localhost:3306/rust";
         let pool = Pool::new(url).unwrap();
         let mut conn = pool.get_conn().unwrap();
